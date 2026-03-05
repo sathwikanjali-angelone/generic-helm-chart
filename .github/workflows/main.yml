@@ -11,21 +11,19 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install Helm
-        uses: azure/setup-helm@v3
-        with:
-          version: v3.13.0
+        uses: azure/setup-helm@v4
 
       - name: Package Helm Chart
         run: |
           helm package app-chart
-          mkdir -p charts
+          mkdir charts
           mv *.tgz charts/
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: helm-chart
-          path: charts
+          path: charts/
