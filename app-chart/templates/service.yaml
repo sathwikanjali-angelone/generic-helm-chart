@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "app-chart.fullname" . }}
+  annotations:
+    {{- toYaml .Values.service.annotations | nindent 4 }}
   labels:
     {{- include "app-chart.labels" . | nindent 4 }}
 spec:
