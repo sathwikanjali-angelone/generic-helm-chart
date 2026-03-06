@@ -1,29 +1,27 @@
-name: Package Helm Chart
+name: Helm Chart CI
 
 on:
   push:
     branches:
       - main
+  pull_request:
 
 jobs:
-  package:
+  helm-test:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install Helm
+      - name: Setup Helm
         uses: azure/setup-helm@v4
 
-      - name: Package Helm Chart
-        run: |
-          helm package app-chart
-          mkdir charts
-          mv *.tgz charts/
+      - name: Helm Lint
+        run: helm lint ./app-chart
 
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: helm-chart
-          path: charts/
+      - name: Helm Template
+        run: helm template test-app ./app-chart
+
+      - name: Dry Run Install
+        run: helm install test-app ./app-chart --dry-run
