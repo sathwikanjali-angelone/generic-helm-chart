@@ -23,7 +23,7 @@ jobs:
         run: helm lint . -f Values.yml
 
       - name: Package Helm chart
-        run: helm package . -f Values.yml
+        run: helm package . 
 
       - name: Get version from Chart.yaml
         id: chart
