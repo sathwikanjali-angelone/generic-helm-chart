@@ -20,10 +20,10 @@ jobs:
         uses: azure/setup-helm@v4
 
       - name: Lint Helm chart
-        run: helm lint .
+        run: helm lint . -f Values.yml.
 
       - name: Package Helm chart
-        run: helm package .
+        run: helm package . -f Values.yml
 
       - name: Get version from Chart.yaml
         id: chart
