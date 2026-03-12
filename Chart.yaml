@@ -1,0 +1,5 @@
+apiVersion: v2
+name: generic-helm-chart
+description: A reusable generic helm chart
+type: application
+version: 0.1.0
