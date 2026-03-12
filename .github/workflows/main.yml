@@ -1,0 +1,22 @@
+name: Helm Chart CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  helm-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Helm
+        uses: azure/setup-helm@v3
+
+      - name: Lint Helm Chart
+        run: helm lint .
+
+      - name: Package Helm Chart
+        run: helm package .
