@@ -20,7 +20,7 @@ jobs:
         uses: azure/setup-helm@v4
 
       - name: Lint Helm chart
-        run: helm lint . -f Values.yml.
+        run: helm lint . -f values.yml.
 
       - name: Package Helm chart
         run: helm package . -f Values.yml
