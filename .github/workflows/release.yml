@@ -28,7 +28,7 @@ jobs:
       - name: Get version from Chart.yaml
         id: chart_version
         run: |
-         V.ERSION=$(grep '^version:' Chart.yaml | awk '{print $2}')
+         VERSION=$(grep '^version:' Chart.yaml | awk '{print $2}')
          echo "Chart version: $VERSION"
          echo "version=$VERSION" >> $GITHUB_OUTPUT
 
