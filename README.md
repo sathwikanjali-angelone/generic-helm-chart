@@ -121,8 +121,8 @@ The version defined in `Chart.yaml` matches the Git tag used in the repository.
 Example:
 
 ```
-version: 0.1.0
-git tag: v0.1.0
+version: 0.1.1
+git tag: v0.1.1
 ```
 
 ---
