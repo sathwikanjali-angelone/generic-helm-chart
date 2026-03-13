@@ -26,10 +26,11 @@ jobs:
         run: helm package . 
 
       - name: Get version from Chart.yaml
-        id: chart
+        id: chart_version
         run: |
-          VERSION=$(grep '^version:' Chart.yaml | awk '{print $2}')
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
+         V.ERSION=$(grep '^version:' Chart.yaml | awk '{print $2}')
+         echo "Chart version: $VERSION"
+         echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Create Git Tag
         run: |
