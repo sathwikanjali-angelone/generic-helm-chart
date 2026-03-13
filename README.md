@@ -119,7 +119,7 @@ Example:
 
 ```
 Chart.yaml
-version: 0.1.2
+version: 0.1.4
 
 Git Tag
 v0.1.2
