@@ -1,84 +1,85 @@
 # Generic Helm Chart
 
-A reusable Helm chart to deploy Kubernetes applications using parameterized configuration.
+A reusable **generic Helm chart** for deploying Kubernetes applications.
 
-This chart allows you to deploy applications by customizing values in `values.yaml` without modifying Kubernetes templates directly.
-
----
-
-## 📦 Overview
-
-This repository contains a **generic Helm chart** built using **Helm** to deploy applications on **Kubernetes**.
-
-The chart is designed to be reusable and configurable through `values.yaml`.
+This repository provides a base Helm chart template that can be reused for deploying containerized applications on Kubernetes. It includes common Kubernetes resources such as **Deployment** and **Service**, and can be customized using Helm values.
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```
 generic-helm-chart
 │
-├── Chart.yaml
-├── values.yaml
+├── .github/
+│   └── workflows/
+│       └── release.yml          # GitHub Actions pipeline for versioning and tagging
+│
 ├── templates/
-│   ├── deployment.yaml
-│   └── service.yaml
+│   ├── deployment.yaml          # Kubernetes Deployment template
+│   └── service.yaml             # Kubernetes Service template
 │
-├── tests/
-│   └── test-values.yaml
+├── tests/                       # Helm chart tests
 │
-└── README.md
+├── Chart.yaml                   # Helm chart metadata
+├── Values.yml                   # Default configuration values
+└── README.md                    # Documentation
 ```
-
-### Description
-
-| File / Folder | Purpose                       |
-| ------------- | ----------------------------- |
-| Chart.yaml    | Helm chart metadata           |
-| values.yaml   | Default configuration values  |
-| templates/    | Kubernetes resource templates |
-| tests/        | Test configuration values     |
-| README.md     | Project documentation         |
 
 ---
 
-## ⚙️ Prerequisites
+## Prerequisites
 
-Make sure the following tools are installed:
+Before installing this Helm chart ensure you have:
 
 * Kubernetes cluster
-* Helm 3+
-* kubectl
+* Helm 3 installed
+
+Install Helm if needed:
+
+```
+https://helm.sh/docs/intro/install/
+```
 
 ---
 
-## 🚀 Installing the Chart
+## Installing the Chart
 
-Clone the repository:
-
-```
-git clone https://github.com/sathwikanjali-angelone/generic-helm-chart.git
-cd generic-helm-chart
-```
-
-Install the chart:
+Install the Helm chart:
 
 ```
 helm install my-release .
 ```
 
+Example:
+
+```
+helm install demo-app .
+```
+
 ---
 
-## 🔧 Customizing Values
+## Upgrading the Chart
 
-You can override default values using a custom values file:
+To upgrade an existing release:
 
 ```
-helm install my-release -f values.yaml .
+helm upgrade my-release .
 ```
 
-Example parameters:
+Example:
+
+```
+helm upgrade demo-app .
+```
+
+---
+
+## Configuration
+
+Configuration values can be customized using **Values.yml**.
+
+Example values:
 
 | Parameter        | Description                | Default   |
 | ---------------- | -------------------------- | --------- |
@@ -88,47 +89,88 @@ Example parameters:
 | service.type     | Kubernetes service type    | ClusterIP |
 | service.port     | Service port               | 80        |
 
+You can override values using:
+
+```
+helm install my-release . -f Values.yml
+```
+
+or
+
+```
+helm install my-release . --set image.tag=1.0.0
+```
+
 ---
 
-## 🧪 Testing the Chart
+## Versioning
 
-Test rendering the Kubernetes manifests:
+This Helm chart follows **Semantic Versioning (SemVer)**.
+
+The **GitHub Actions pipeline automatically manages chart versioning and git tags**.
+
+Pipeline workflow:
+
+1. The pipeline reads the chart version from `Chart.yaml`
+2. The chart is validated and packaged
+3. A Git tag is created using the same version
+
+Example:
 
 ```
-helm template my-release .
+Chart.yaml
+version: 0.1.2
+
+Git Tag
+v0.1.2
 ```
 
-Validate the chart:
+This ensures the **version defined in `Chart.yaml` always matches the Git tag in the repository**.
+
+---
+
+## Packaging the Chart
+
+To manually package the Helm chart:
+
+```
+helm package .
+```
+
+This will generate a package like:
+
+```
+generic-helm-chart-0.1.2.tgz
+```
+
+---
+
+## Linting the Chart
+
+Validate the chart before deploying:
 
 ```
 helm lint .
 ```
 
-Use test values:
-
-```
-helm template my-release -f tests/test-values.yaml .
-```
-
 ---
 
-## 🔖 Versioning
+## Running Helm Tests
 
-This chart follows **semantic versioning**.
+You can run Helm chart tests using:
 
-The version defined in `Chart.yaml` matches the Git tag used in the repository.
+```
+helm test <release-name>
+```
 
 Example:
 
 ```
-version: 0.1.1
-git tag: v0.1.1
+helm test demo-app
 ```
 
 ---
 
-## 📜 License
+## Maintainers
 
-This project is open source and available under the MIT License.
-
----
+Maintained by the DevOps team.
