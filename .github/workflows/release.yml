@@ -36,5 +36,5 @@ jobs:
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git tag v${{ steps.chart.outputs.version }}
-          git push origin v${{ steps.chart.outputs.version }}
+          git tag v${{ steps.chart_version.outputs.version }}
+          git push origin v${{ steps.chart_version.outputs.version }}
