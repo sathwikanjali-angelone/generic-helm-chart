@@ -19,10 +19,26 @@ jobs:
         with:
           version: v3.12.0
 
+      - name: Setup Kind cluster
+        uses: helm/kind-action@v1
+
       - name: Lint Helm chart
         run: |
-          helm lint .
+          helm lint . -f Values.yml
 
       - name: Package Helm chart
         run: |
           helm package .
+
+      - name: Deploy sample nginx app
+        run: |
+          helm install demo-app . -f Values.yml
+
+      - name: Verify deployment
+        run: |
+          kubectl get pods
+          kubectl get svc
+
+      - name: Run Helm tests
+        run: |
+          helm test demo-app
