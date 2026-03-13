@@ -122,7 +122,7 @@ Chart.yaml
 version: 0.1.4
 
 Git Tag
-v0.1.2
+v0.1.4
 ```
 
 This ensures the **version defined in `Chart.yaml` always matches the Git tag in the repository**.
@@ -140,7 +140,7 @@ helm package .
 This will generate a package like:
 
 ```
-generic-helm-chart-0.1.2.tgz
+generic-helm-chart-0.1.4.tgz
 ```
 
 ---
